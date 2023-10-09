@@ -162,8 +162,23 @@ public class LinkedList {
         }
         return true;
     }
-
-    public boolean cycle() { // Floyd's CFA
+    public static int helper(Node head,int key){
+        if(head ==null){
+            return -1;
+        }
+        if(head.data==key){
+            return 0;
+        }
+        int idx=helper(head.next, key);
+        if(idx==-1){
+            return -1;
+        }
+        return idx+1;
+    }
+    public static int recSearch(int key){
+        return helper(head,key);
+    }
+    public static boolean iscycle() { // Floyd's CFA
         Node slow = head;
         Node fast = head;
         while (fast != null && fast.next != null) {
@@ -175,25 +190,64 @@ public class LinkedList {
         }
         return false;
     }
+    public static void removeCycle(){
+        //detecting cycle
+        Node slow=head;
+        Node fast=head;
+        boolean cycle = false;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast=fast.next.next;
+            if(slow == fast){
+                cycle=true;
+                break;
+            }
+        }
+        //meeting point
+        if(cycle==false){
+            return;
+        }
+        slow=head;
+        Node prev=null;
+        while(slow!=fast){
+            prev=fast;
+            slow=slow.next;
+            fast=fast.next;
+        }
+        //removing cycle -> last.next =null
+        prev.next = null;
+    }
 
     public static void main(String args[]) {
         // You can test your linked list operations here
-        LinkedList ll = new LinkedList();
-        ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addLast(1);
-        ll.addLast(2);
-
-        // ll.add_middle(2, 10);
-        // ll.print();
-        // System.out.println();
-        // System.out.println(size);
-        // System.out.println(ll.removefirst());
-        // ll.print();
-        // System.out.println(ll.removelast());
-        // ll.reverse();
-        // ll.print();
-        // System.out.println(ll.isPalindrome());
-        System.out.println(ll.cycle());
+        // LinkedList ll = new LinkedList();
+        // addFirst(1);
+        // addFirst(2);
+        // addLast(1);
+        // addLast(2);
+        // print();
+        // // ll.add_middle(2, 10);
+        // // ll.print();
+        // // System.out.println();
+        // // System.out.println(size);
+        // // System.out.println(ll.removefirst());
+        // // ll.print();
+        // // System.out.println(ll.removelast());
+        // // ll.reverse();
+        // // ll.print();
+        // // System.out.println(ll.isPalindrome());
+        // System.out.println(ll.iscycle());
+        head =new Node(1);
+        Node temp =new Node(2);
+        head.next=new Node(8);
+        head.next.next = temp;
+        head.next.next.next=new Node(7);
+        head.next.next.next.next=new Node(6);
+        head.next.next.next.next.next=temp;
+        System.out.println(iscycle());
+        print();
+        removeCycle();
+        System.out.println(iscycle());
+        print();
     }
 }
