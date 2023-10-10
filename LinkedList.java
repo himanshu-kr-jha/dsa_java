@@ -41,6 +41,7 @@ public class LinkedList {
     public static void print() {
         if (head == null) {
             System.out.println("EMPTY linked list");
+            return;
         }
         Node temp = head;
         while (temp != null) {
