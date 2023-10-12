@@ -218,6 +218,55 @@ public class LinkedList {
         //removing cycle -> last.next =null
         prev.next = null;
     }
+    public static Node miNode(Node head){
+        Node slow = head;
+        Node fast =head.next;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+
+    public static Node merge(Node head1,Node head2){
+        Node mergedLL=new Node(-1);
+        Node ptr = mergedLL;
+        while(head1!=null && head2!=null){
+            if(head1.data<head2.data){
+                ptr.next=head1;
+                head1=head1.next;
+                ptr=ptr.next;
+            }else{
+                ptr.next=head2;
+                head2=head2.next;
+                ptr=ptr.next;
+            }
+        }
+        while(head1!=null){
+            ptr.next=head1;
+            head1=head1.next;
+            ptr=ptr.next;
+        }
+        while(head2!=null){
+            ptr.next=head1;
+            head2=head2.next;
+            ptr=ptr.next;
+        }
+        return mergedLL;
+    }
+    public static Node mergesort(Node head){
+        // find middle
+        Node mid = midNode(head);
+        //divide and mergesort for left and right half
+        Node rightNode=mid.next;
+        mid.next=null;
+        Node lefNode=head;
+        mergesort(lefNode);
+        mergesort(rightNode);
+        //merge
+        return merge(lefNode,rightNode);
+
+    }
     // merge sort in linked list
     /*
      1.find middle of linked list -> previous mid node method but initalize .... fast = head.next
@@ -226,6 +275,50 @@ public class LinkedList {
     3. merge i.e  merge(head) //left half and merge(righthead)//right half
     funtion for merge sort
      */
+
+    public Node midnode(Node head){
+        Node slow =head;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public Node reverse(Node head){
+        Node prev = null;
+        Node curr = head;
+        Node next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+    public void reorderList(Node head) {
+        //find mid
+        Node mid = midnode(head);
+        //reverse second half;
+        Node head1=head;
+        Node head2=mid.next;
+        mid.next=null;
+        head2=reverse(head2);
+        //alternate merging
+ //       Node newLL = new Node(-1);
+        Node nextL,nextR;
+        while(head1!=null && head2!=null){
+            nextL=head1.next;
+            head1.next=head2;
+            nextR=head2.next;
+            head2.next=nextL;
+            head1=nextL;
+            head2=nextR;         
+        }
+    }
+    
     public static void main(String args[]) {
         // You can test your linked list operations here
         // LinkedList ll = new LinkedList();
