@@ -276,6 +276,7 @@ public class LinkedList {
     funtion for merge sort
      */
 
+     //zig zig linked list
     public Node midnode(Node head){
         Node slow =head;
         Node fast = head;
@@ -316,9 +317,9 @@ public class LinkedList {
             head2.next=nextL;
             head1=nextL;
             head2=nextR;         
-        }
+        }   
     }
-    
+    //about doubly linked list - study at this path => DS_LAB_G3/dsassign6_78.c
     public static void main(String args[]) {
         // You can test your linked list operations here
         // LinkedList ll = new LinkedList();

@@ -81,7 +81,9 @@ public class arrays {
         int found = linear_search(number, 5);
         if (found == -1) {
             System.out.println("Not found");
-        } else {
+        } 
+        else 
+        {
             System.out.println("index-" + found);
         }
 
