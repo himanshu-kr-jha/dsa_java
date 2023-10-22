@@ -72,6 +72,27 @@ public class LinkedList {
         newNode.next = temp.next;
         temp.next = newNode;
     }
+    public static Node deleteMfromN(Node head,int m,int n){
+        m=1;
+        n=n+m;
+        Node temp1,temp2,ptr;
+        ptr=head;
+        int i=1;
+        while(i<=m){
+            ptr=ptr.next;
+            i++;
+        }
+        temp1=ptr;
+        while(i<=n){
+            ptr=ptr.next;
+            i++;
+        }
+        temp2=ptr.next;
+        //deleting
+        temp1.next=temp2;
+        ptr.next=null;
+        return head;
+    }
 
     public static int removefirst() {
         if (size == 0) {
@@ -322,12 +343,17 @@ public class LinkedList {
     //about doubly linked list - study at this path => DS_LAB_G3/dsassign6_78.c
     public static void main(String args[]) {
         // You can test your linked list operations here
-        // LinkedList ll = new LinkedList();
-        // addFirst(1);
-        // addFirst(2);
-        // addLast(1);
-        // addLast(2);
-        // print();
+        LinkedList ll = new LinkedList();
+        addFirst(1);
+        addFirst(2);
+        addLast(1);
+        addLast(2);
+        addLast(8);
+        addFirst(0);
+        print();
+        deleteMfromN(head,2,3);
+        print();
+
         // // ll.add_middle(2, 10);
         // // ll.print();
         // // System.out.println();
@@ -339,17 +365,17 @@ public class LinkedList {
         // // ll.print();
         // // System.out.println(ll.isPalindrome());
         // System.out.println(ll.iscycle());
-        head =new Node(1);
-        Node temp =new Node(2);
-        head.next=new Node(8);
-        head.next.next = temp;
-        head.next.next.next=new Node(7);
-        head.next.next.next.next=new Node(6);
-        head.next.next.next.next.next=temp;
-        System.out.println(iscycle());
-        print();
-        removeCycle();
-        System.out.println(iscycle());
-        print();
+        // head =new Node(1);
+        // Node temp =new Node(2);
+        // head.next=new Node(8);
+        // head.next.next = temp;
+        // head.next.next.next=new Node(7);
+        // head.next.next.next.next=new Node(6);
+        // head.next.next.next.next.next=temp;
+        // System.out.println(iscycle());
+        // print();
+        // removeCycle();
+        // System.out.println(iscycle());
+        // print();
     }
 }
