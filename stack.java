@@ -100,6 +100,29 @@ public class stack{
             reverse(s);
             pushAtbottom(s, top);
         }
+        public static void stockSpan(int stock[],int span[]){
+            //span of 0th element would be 1 and that of (n-1)th element would be n+1. 
+            // span = index -  prevHighIDX
+            
+            // store prev_high index in stack... if current element is smaller than prev , then keep poping until immediate bigger element
+            Stack<Integer> s =new Stack<>();
+            span[0]=1;
+            s.push(0);
+            for(int i=1;i<stock.length;i++){
+                int curr_price=stock[i];
+                while(!s.isEmpty() && curr_price>stock[s.peek()]){
+                    s.pop();
+                }
+                if(s.isEmpty()){
+                    span[i]=stock.length+1;
+                }else{
+                    int prev_high=s.peek();
+                    span[i]=i-prev_high;
+                }
+                s.push(i);
+            }
+
+        }
     public static void main(String args[]){
         /*
          
@@ -110,22 +133,22 @@ public class stack{
         there are other functionality of Stack in JCF 
          */
         //stackA s1=new stackA();
-        Stack<Integer>s =new Stack<>();
-        s.push(1);
-        s.push(2);
-        s.push(3);
-        reverse(s);
-        while(!s.isEmpty()){
-            System.out.println(s.peek());
-            s.pop();
-        }
+        // Stack<Integer>s =new Stack<>();
+        // s.push(1);
+        // s.push(2);
+        // s.push(3);
+        // reverse(s);
+        // while(!s.isEmpty()){
+        //     System.out.println(s.peek());
+        //     s.pop();
+        // }
         // System.out.println("after push at bottom");
         // pushAtbottom(s,4);
         // while(!s.isEmpty()){
         //     System.out.println(s.peek());
             
         // }
-        System.out.println(reverseString("Himanshu"));
+        // System.out.println(reverseString("Himanshu"));
         // stackLL s1 = new stackLL();
         // System.out.println(s1.isEmpty());
         // s1.push(2);
@@ -139,5 +162,11 @@ public class stack{
         // System.out.println(s1.pop());
         // System.out.println(s1.peek());
         // System.out.println(s1.isEmpty());
+        int stock[]={100,80,60,70,60,85,100};
+        int span[]=new int[7];
+        stockSpan(stock, span);
+        for(int i=0;i<span.length;i++){
+            System.out.println(span[i]);
+        }
     }
 }
