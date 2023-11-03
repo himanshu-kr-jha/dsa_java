@@ -123,13 +123,86 @@ public class stack{
             }
 
         }
-    public static void main(String args[]){
-        /*
-         
+        public static int[] nextgreaterelement(int arr[]){
+            // this function is implemented by using index of the given array.
+
+            Stack<Integer>nxtStack=new Stack<>();
+            int nxtArr[]=new int[arr.length] ;
+            for(int i=arr.length-1;i>=0;i--){
+                while(!nxtStack.isEmpty()&&arr[nxtStack.peek()]<=arr[i]){
+                    nxtStack.pop();
+                }
+                if(nxtStack.isEmpty()){
+                    nxtArr[i]=-1;
+                }else{
+                    nxtArr[i]=arr[nxtStack.peek()];
+                }
+                nxtStack.push(i);
+            }
+            return nxtArr;
+            //four variations can be possible with this logic...
+            //next greater right
+            //next greater left
+            //next smaller right
+            //next smaller left
+        }
+
+        public static boolean validParenthese(String str){
+            Stack<Character>s=new Stack<>();
+            for(int i=0;i<str.length();i++){
+                char token=str.charAt(i);
+                if(token=='('||token=='{'||token=='['){
+                    s.push(token);
+                }else{
+                    if((s.peek()=='{'&&token=='}')||(s.peek()=='['&&token==']')||(s.peek()=='('&&token==')')){
+                        s.pop();
+                    }else{
+                        return false;
+                    }
+                }
+            }
+            if(s.isEmpty()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        public static boolean duplicateParentheses(String str){
+            for (int i=0;i<str.length()-1;i++){
+                Stack<Character>s=new Stack<>();
+                char ch=str.charAt(i);
+                if(ch==')'){
+                    int count=0;
+                    while(!s.isEmpty()&&s.peek()!='('){
+                        count++;
+                        s.pop();
+                    }
+                    if(count<1){
+                        return true;
+                    }else{
+                        s.pop();
+                    }
+                }else{
+                    s.push(ch);
+                }
+            }
+            return false;
+        }
+
+        public static int maxAreaHistogram(int arr[]){
+            int max=0;
+            int rightSmallerArr[]=new int[arr.length];
+            int leftSmallerArr[]=new int[arr.length];
+            //next smaller right
+            //next smaller left
+            //current area
+            return -1;
+        }
+        public static void main(String args[]){
+        /* 
         //object.push(int data)
         //object.pop() -> remove and returns poped element
-        //object.peek() -> returns the last element of stack
-             
+        //object.peek() -> returns the last element of stack   
         there are other functionality of Stack in JCF 
          */
         //stackA s1=new stackA();
@@ -162,11 +235,24 @@ public class stack{
         // System.out.println(s1.pop());
         // System.out.println(s1.peek());
         // System.out.println(s1.isEmpty());
-        int stock[]={100,80,60,70,60,85,100};
-        int span[]=new int[7];
-        stockSpan(stock, span);
-        for(int i=0;i<span.length;i++){
-            System.out.println(span[i]);
-        }
+        // int stock[]={100,80,60,70,60,85,100};
+        // int span[]=new int[7];
+        // stockSpan(stock, span);
+        // for(int i=0;i<span.length;i++){
+        //     System.out.println(span[i]);
+        // }
+        //Stack<Integer>s =new Stack<>();
+        // int arr[]={6,8,0,1,3};
+        // int arr[]={8,9,4,6,2};
+        // int arr[]={1,0,1,1,1,0};
+        // int nGe[]=nextgreaterelement(arr);
+        // for(int i=0; i<nGe.length;i++){
+        //     System.out.print(nGe[i]+" ");
+        // }
+        // String str="(){}[]";
+        // System.out.println(validParenthese(str));
+        String str="((c+d))";
+        System.out.println(duplicateParentheses(str));
+
     }
 }
