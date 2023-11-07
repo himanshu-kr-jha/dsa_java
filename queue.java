@@ -1,5 +1,8 @@
 import java.util.*;
 public class queue {
+    // Implementation of queue using array
+    
+    /* 
     static class QueueA{
         static int arr[];
         static int size;
@@ -36,6 +39,12 @@ public class queue {
             return arr[0];
         }
     }
+    */
+
+// Implementation of circular queue using arrays
+    
+/* 
+
     static class CircularQueue{
         static int arr[];
         static int size;
@@ -83,7 +92,11 @@ public class queue {
             return arr[front];
         }
     }
-    
+
+    */
+
+    // Node of linked list
+    /* 
     static class Node{
             int data;
             Node next;
@@ -93,6 +106,11 @@ public class queue {
                 this.next=null;
             }
         }
+       */ 
+
+//Queue implementation with linked list
+      
+      /* 
     static class QueueLL{
         //we will maintain head and tail pointer  and apply 
         // enqueue-> add at end
@@ -133,7 +151,7 @@ public class queue {
             return head.data;
         }
         
-    }
+    }*/
     public class queueJCF{
         // object of queue cannot be made as it is interface
         // in java queue can be implemented by two ways 1. linked list and 2.ArratDeque
@@ -150,7 +168,8 @@ public class queue {
         //     System.out.println(a.peek());
         //     a.dequeue();    
         // }
-        Queue<Integer> q = new java.util.LinkedList<>();
+        // Queue<Integer> q = new java.util.LinkedList<>();
+        Queue <Integer> q = new ArrayDeque<>();
         q.add(1);
         q.add(2);
         System.out.println(q.peek());
