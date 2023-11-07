@@ -189,14 +189,56 @@ public class stack{
             return false;
         }
 
+        public static int[] nextsmallerelementR(int arr[]){
+            // this function is implemented by using index of the given array.
+            Stack<Integer>nxtStack=new Stack<>();
+            int nxtArr[]=new int[arr.length] ;
+            for(int i=arr.length-1;i>=0;i--){
+                while(!nxtStack.isEmpty()&&arr[nxtStack.peek()]>=arr[i]){
+                    nxtStack.pop();
+                }
+                if(nxtStack.isEmpty()){
+                    nxtArr[i]=arr.length;
+                }else{
+                    nxtArr[i]=nxtStack.peek();
+                }
+                nxtStack.push(i);
+            }
+            return nxtArr;
+        }
+        public static int[] nextsmallerelementL(int arr[]) {
+            Stack<Integer> nxtStack = new Stack<>();
+            int nxtArr[] = new int[arr.length];
+            for (int i = 0; i < arr.length; i++) {  // Change loop condition to iterate through all elements
+                while (!nxtStack.isEmpty() && arr[nxtStack.peek()] >= arr[i]) {
+                    nxtStack.pop();
+                }
+                if (nxtStack.isEmpty()) {
+                    nxtArr[i] = -1;
+                } else {
+                    nxtArr[i] = nxtStack.peek();
+                }
+                nxtStack.push(i);
+            }
+            return nxtArr;
+        }
+        
+
         public static int maxAreaHistogram(int arr[]){
             int max=0;
             int rightSmallerArr[]=new int[arr.length];
             int leftSmallerArr[]=new int[arr.length];
             //next smaller right
+            rightSmallerArr=nextsmallerelementR(arr);
             //next smaller left
+            leftSmallerArr=nextsmallerelementL(arr);
             //current area
-            return -1;
+            for(int i=0;i<arr.length;i++){
+                int width=rightSmallerArr[i]-leftSmallerArr[i]-1;
+                int area= arr[i]*width;
+                max=Math.max(max, area);
+            }
+            return max;
         }
         public static void main(String args[]){
         /* 
@@ -251,8 +293,10 @@ public class stack{
         // }
         // String str="(){}[]";
         // System.out.println(validParenthese(str));
-        String str="((c+d))";
-        System.out.println(duplicateParentheses(str));
+        // String str="((c+d))";
+        // System.out.println(duplicateParentheses(str));
+        int arr[]={8,3,5,3};
+        System.out.println(maxAreaHistogram(arr));
 
     }
 }
